@@ -2,8 +2,6 @@
 
 namespace WinFormsControlLibraryJournal;
 
-//todo: обработка нажатия
-//todo: разъезд элементов
 public partial class UserControlPlan : UserControl
 {
 	/// <summary> Статический указатель на журнал </summary>

@@ -142,9 +142,7 @@ public class Journal
 
 		this._classes.Remove(@class.Id);
 
-		//todo: проверить на корректность (в примере обращаются через ListPlans, используется for loop)
-		var plansToDelete = this._plans.FindAll(item => item.ClassId == @class.Id);
-		foreach (var item in plansToDelete) {
+		foreach (var item in this._plans.FindAll(item => item.ClassId == @class.Id)) {
 			this.RemovePlan(item);
 		}
 		this.ClassRemoved?.Invoke(@class, EventArgs.Empty);
@@ -160,9 +158,7 @@ public class Journal
 
 		this._students.Remove(student.Id);
 
-		//todo: проверить на корректность (в примере обращаются через ListPlans, используется for loop)
-		var plansToDelete = this._plans.FindAll(item => item.StudentId == student.Id);
-		foreach (var item in plansToDelete) {
+		foreach (var item in this._plans.FindAll(item => item.StudentId == student.Id)) {
 			this.RemovePlan(item);
 		}
 		this.StudentRemoved?.Invoke(student, EventArgs.Empty);
