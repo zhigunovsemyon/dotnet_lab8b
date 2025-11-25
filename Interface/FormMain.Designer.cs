@@ -272,7 +272,9 @@
 			this.Controls.Add(this.tabControlMain);
 			this.Controls.Add(this.menuStrip1);
 			this.MainMenuStrip = this.menuStrip1;
+			this.MinimumSize = new Size(360, 180);
 			this.Name = "FormMain";
+			this.StartPosition = FormStartPosition.CenterScreen;
 			this.Text = "Факультативы";
 			this.menuStrip1.ResumeLayout(false);
 			this.menuStrip1.PerformLayout();
