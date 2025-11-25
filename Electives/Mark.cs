@@ -4,7 +4,7 @@ namespace Electives;
 
 /// <summary>Оценка</summary>
 /// <param name="t">Значение</param>
-public class Mark (Mark.Type t = Mark.Type.None)
+public struct Mark (Mark.Type t = Mark.Type.None)
 {
 	/// <summary>Возможное значение оценки</summary>
 	public enum Type : byte

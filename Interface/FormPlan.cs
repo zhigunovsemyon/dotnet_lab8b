@@ -87,7 +87,7 @@ public partial class FormPlan : Form
 	{
 		var selectedStudent = this.comboBoxStudents.SelectedItem as Electives.Student;
 		var selectedClass = this.comboBoxClasses.SelectedItem as Electives.Class;
-		var selectedMark = this.comboBoxMarks.SelectedItem as Electives.Mark;
+		Electives.Mark? selectedMark = (Electives.Mark?)this.comboBoxMarks.SelectedItem;
 		if (null == selectedClass || selectedStudent == null || selectedMark == null) {
 
 			this.DialogResult = DialogResult.Retry;
@@ -96,7 +96,7 @@ public partial class FormPlan : Form
 
 		this.Plan.ClassId = selectedClass.Id;
 		this.Plan.StudentId = selectedStudent.Id;
-		this.Plan.Mark = selectedMark;
+		this.Plan.Mark = (Mark)selectedMark;
 
 		this.DialogResult = DialogResult.OK;
 		this.Close();
