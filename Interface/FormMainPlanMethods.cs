@@ -17,7 +17,7 @@ public partial class FormMain : Form
 			var ucPlan = item as UserControlPlan;
 			Debug.Assert(ucPlan != null);
 
-			if (ucPlan.Selected){
+			if (ucPlan.Selected) {
 				this.AddOrEditPlan(ucPlan.Plan);
 				return;
 			}

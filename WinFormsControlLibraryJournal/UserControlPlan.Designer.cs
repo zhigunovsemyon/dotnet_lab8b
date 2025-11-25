@@ -51,6 +51,7 @@
 			this.textBoxStudent.Size = new Size(523, 23);
 			this.textBoxStudent.TabIndex = 1;
 			this.textBoxStudent.Click += this.UserControlPlan_Click;
+			this.textBoxStudent.DoubleClick += this.UserControlPlan_DoubleClick;
 			// 
 			// labelClass
 			// 
@@ -61,6 +62,7 @@
 			this.labelClass.TabIndex = 2;
 			this.labelClass.Text = "Предмет";
 			this.labelClass.Click += this.UserControlPlan_Click;
+			this.labelClass.DoubleClick += this.UserControlPlan_DoubleClick;
 			// 
 			// textBoxClass
 			// 
@@ -71,6 +73,7 @@
 			this.textBoxClass.Size = new Size(333, 23);
 			this.textBoxClass.TabIndex = 0;
 			this.textBoxClass.Click += this.UserControlPlan_Click;
+			this.textBoxClass.DoubleClick += this.UserControlPlan_DoubleClick;
 			// 
 			// textBoxMark
 			// 
@@ -81,6 +84,7 @@
 			this.textBoxMark.Size = new Size(60, 23);
 			this.textBoxMark.TabIndex = 2;
 			this.textBoxMark.Click += this.UserControlPlan_Click;
+			this.textBoxMark.DoubleClick += this.UserControlPlan_DoubleClick;
 			// 
 			// labelMark
 			// 
@@ -91,6 +95,7 @@
 			this.labelMark.TabIndex = 1;
 			this.labelMark.Text = "Оценка";
 			this.labelMark.Click += this.UserControlPlan_Click;
+			this.labelMark.DoubleClick += this.UserControlPlan_DoubleClick;
 			// 
 			// buttonDelete
 			// 
@@ -112,6 +117,7 @@
 			this.labelStudent.TabIndex = 0;
 			this.labelStudent.Text = "Студент";
 			this.labelStudent.Click += this.UserControlPlan_Click;
+			this.labelStudent.DoubleClick += this.UserControlPlan_DoubleClick;
 			// 
 			// tableLayoutPanelGlob
 			// 
@@ -129,6 +135,7 @@
 			this.tableLayoutPanelGlob.Size = new Size(603, 73);
 			this.tableLayoutPanelGlob.TabIndex = 3;
 			this.tableLayoutPanelGlob.Click += this.UserControlPlan_Click;
+			this.tableLayoutPanelGlob.DoubleClick += this.UserControlPlan_DoubleClick;
 			// 
 			// tableLayoutPanelTop
 			// 
@@ -145,6 +152,7 @@
 			this.tableLayoutPanelTop.Size = new Size(593, 28);
 			this.tableLayoutPanelTop.TabIndex = 0;
 			this.tableLayoutPanelTop.Click += this.UserControlPlan_Click;
+			this.tableLayoutPanelTop.DoubleClick += this.UserControlPlan_DoubleClick;
 			// 
 			// tableLayoutPanelBottom
 			// 
@@ -167,6 +175,7 @@
 			this.tableLayoutPanelBottom.Size = new Size(593, 27);
 			this.tableLayoutPanelBottom.TabIndex = 1;
 			this.tableLayoutPanelBottom.Click += this.UserControlPlan_Click;
+			this.tableLayoutPanelBottom.DoubleClick += this.UserControlPlan_DoubleClick;
 			// 
 			// UserControlPlan
 			// 
@@ -177,6 +186,7 @@
 			this.Size = new Size(603, 73);
 			this.Load += this.UserControlPlan_Load;
 			this.Click += this.UserControlPlan_Click;
+			this.DoubleClick += this.UserControlPlan_DoubleClick;
 			this.tableLayoutPanelGlob.ResumeLayout(false);
 			this.tableLayoutPanelTop.ResumeLayout(false);
 			this.tableLayoutPanelTop.PerformLayout();

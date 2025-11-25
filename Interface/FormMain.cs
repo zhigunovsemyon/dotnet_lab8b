@@ -23,6 +23,17 @@ public partial class FormMain : Form
 
 		Journal.Get.ClassAdded += this.ItemAdded;
 		Journal.Get.ClassRemoved += this.ItemRemoved;
+
+		UserControlPlan.PlanNeedsToUpdate += this.UpdateSelectedPlan;
+	}
+
+	/// <summary> Метод, вызываемый ивентом при необходимости изменения плана </summary>
+	/// <param name="sender">Изменяемый план</param>
+	private void UpdateSelectedPlan (object? sender, EventArgs e)
+	{
+		if (sender is Electives.Plan plan) {
+			this.AddOrEditPlan(plan);
+		}
 	}
 
 	/// <summary> Метод для закрытия приложения через пункт меню </summary>
@@ -81,7 +92,7 @@ public partial class FormMain : Form
 	/// <exception cref="InvalidDataException">При sender неправильного типа</exception>
 	private void PlanRemoved (object? sender, EventArgs e)
 	{
-		var oldPlan = sender as Electives.Plan 
+		var oldPlan = sender as Electives.Plan
 			?? throw new InvalidDataException("FormMain.PlanAdded: sender is invalid");
 
 		foreach (var item in tabPagePlans.Controls) {
@@ -101,9 +112,17 @@ public partial class FormMain : Form
 	/// <exception cref="InvalidDataException">При sender неправильного типа</exception>
 	private void PlanAdded (object? sender, EventArgs e)
 	{
-		var newPlan = sender as Electives.Plan 
+		var newPlan = sender as Electives.Plan
 			?? throw new InvalidDataException("FormMain.PlanAdded: sender is invalid");
 
-		tabPagePlans.Controls.Add(new UserControlPlan(newPlan){ Dock = DockStyle.Top });
+		tabPagePlans.Controls.Add(new UserControlPlan(newPlan) { Dock = DockStyle.Top });
+	}
+
+	/// <summary> Обработка нажатия по пустому полю для снятия выделения </summary>
+	private void tabPagePlans_Click (object sender, EventArgs e)
+	{
+		foreach (var item in tabPagePlans.Controls) {
+			((UserControlPlan)item).Selected = false;
+		}
 	}
 }

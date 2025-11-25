@@ -263,6 +263,7 @@
 			this.tabPagePlans.TabIndex = 2;
 			this.tabPagePlans.Text = "Планы";
 			this.tabPagePlans.UseVisualStyleBackColor = true;
+			this.tabPagePlans.Click += this.tabPagePlans_Click;
 			// 
 			// FormMain
 			// 

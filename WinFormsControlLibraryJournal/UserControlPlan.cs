@@ -9,6 +9,9 @@ public partial class UserControlPlan : UserControl
 	/// <summary> Статический указатель на журнал </summary>
 	private static readonly Electives.Journal s_journal = Electives.Journal.Get;
 
+	/// <summary> Ивент, вызываемый при необходимости изменения выделенного элемента </summary>
+	static public event EventHandler? PlanNeedsToUpdate;
+
 	/// <summary> План данного элемента </summary>
 	public Electives.Plan Plan { get; init; }
 
@@ -60,8 +63,9 @@ public partial class UserControlPlan : UserControl
 		set
 		{
 			this.CleanSelections();
-			this._selected = value;
-			this.BackColor = Color.CornflowerBlue;
+			if ((this._selected = value) == true) {
+				this.BackColor = Color.CornflowerBlue;
+			}
 		}
 	}
 
@@ -79,4 +83,8 @@ public partial class UserControlPlan : UserControl
 			ucPlan.BackColor = DefaultBackColor;
 		}
 	}
+
+	/// <summary> Вызов необходимости обновления элемента по двойному нажатию </summary>
+	private void UserControlPlan_DoubleClick (object sender, EventArgs e) 
+		=> PlanNeedsToUpdate?.Invoke(this.Plan, EventArgs.Empty);
 }
