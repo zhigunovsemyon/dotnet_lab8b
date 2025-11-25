@@ -86,10 +86,10 @@ public class Journal
 		}
 
 		try {
-			if (this._classes.TryAdd(newClass.Id, newClass)){
+			if (this._classes.TryAdd(newClass.Id, newClass)) {
 				this.ClassAdded?.Invoke(newClass, EventArgs.Empty);
 			} else {
-				var oldClass= this._classes[newClass.Id];
+				var oldClass = this._classes[newClass.Id];
 				this._classes[newClass.Id] = newClass;
 
 				this.ClassAdded?.Invoke(newClass, EventArgs.Empty);
@@ -143,7 +143,7 @@ public class Journal
 		this._classes.Remove(@class.Id);
 
 		//todo: проверить на корректность (в примере обращаются через ListPlans, используется for loop)
-		var plansToDelete = this._plans.FindAll(item => item.Class.Id == @class.Id);
+		var plansToDelete = this._plans.FindAll(item => item.ClassId == @class.Id);
 		foreach (var item in plansToDelete) {
 			this.RemovePlan(item);
 		}
@@ -161,10 +161,39 @@ public class Journal
 		this._students.Remove(student.Id);
 
 		//todo: проверить на корректность (в примере обращаются через ListPlans, используется for loop)
-		var plansToDelete = this._plans.FindAll(item => item.Student.Id == student.Id);
+		var plansToDelete = this._plans.FindAll(item => item.StudentId == student.Id);
 		foreach (var item in plansToDelete) {
 			this.RemovePlan(item);
 		}
 		this.StudentRemoved?.Invoke(student, EventArgs.Empty);
+	}
+
+
+	/// <summary> Вспомогательная функция для поиска студента по id </summary>
+	/// <param name="students">Список студентов</param>
+	/// <param name="id">Идентификатор</param>
+	/// <returns>Найденный студент или null</returns>
+	public Student? FindStudent (int id)
+	{
+		try {
+			return this._students[id];
+		}
+		catch (KeyNotFoundException) {
+			return null;
+		}
+	}
+
+	/// <summary> Вспомогательная функция для поиска предмета по id </summary>
+	/// <param name="classes">Список предметов</param>
+	/// <param name="id">Идентификатор</param>
+	/// <returns>Найденный предмет или null</returns>
+	public Class? FindClass (int id)
+	{
+		try {
+			return this._classes[id];
+		}
+		catch (KeyNotFoundException) {
+			return null;
+		}
 	}
 }

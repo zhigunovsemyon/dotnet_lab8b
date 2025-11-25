@@ -6,6 +6,7 @@ namespace WinFormsControlLibraryJournal;
 //todo: разъезд элементов
 public partial class UserControlPlan : UserControl
 {
+	/// <summary> Статический указатель на журнал </summary>
 	private static readonly Electives.Journal s_journal = Electives.Journal.Get;
 
 	/// <summary> План данного элемента </summary>
@@ -30,10 +31,11 @@ public partial class UserControlPlan : UserControl
 	/// <summary> Ивент, выполняемый по появлению пункта </summary>
 	private void UserControlPlan_Load (object sender, EventArgs e)
 	{
-		this.textBoxClass.Text = this.Plan.Class.ToString();
-		this.textBoxMark.Text = this.Plan.Mark.ToString();
-		this.textBoxStudent.Text = this.Plan.Student.ToString();
+		this.textBoxClass.Text = s_journal.FindClass(this.Plan.ClassId)?.ToString();
 
+		this.textBoxStudent.Text = s_journal.FindStudent(this.Plan.StudentId)?.ToString();
+
+		this.textBoxMark.Text = this.Plan.Mark.ToString();
 		this.textBoxMark.BackColor = MarkToColour(this.Plan.Mark.Value);
 	}
 

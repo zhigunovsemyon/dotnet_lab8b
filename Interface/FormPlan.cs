@@ -5,6 +5,9 @@ namespace Interface;
 /// <summary> Форма редактирования плана </summary>
 public partial class FormPlan : Form
 {
+	/// <summary> Статический указатель на журнал </summary>
+	private static readonly Electives.Journal s_journal = Electives.Journal.Get;
+
 	public Electives.Plan _plan = new();
 
 	/// <summary> Поле с редактируемым планом </summary>
@@ -14,8 +17,8 @@ public partial class FormPlan : Form
 		set 
 		{
 			this._plan = value;
-			this.comboBoxClasses.SelectedItem = this.Plan.Class;
-			this.comboBoxStudents.SelectedItem = this.Plan.Student;
+			this.comboBoxClasses.SelectedItem = s_journal.FindClass(this.Plan.ClassId);
+			this.comboBoxStudents.SelectedItem = s_journal.FindStudent(this.Plan.StudentId);
 			this.comboBoxMarks.SelectedIndex = (int)(this.Plan.Mark.Value);
 		}
 	}
@@ -91,8 +94,8 @@ public partial class FormPlan : Form
 			return;
 		}
 
-		this.Plan.Class = selectedClass;
-		this.Plan.Student = selectedStudent;
+		this.Plan.ClassId = selectedClass.Id;
+		this.Plan.StudentId = selectedStudent.Id;
 		this.Plan.Mark = selectedMark;
 
 		this.DialogResult = DialogResult.OK;
