@@ -157,6 +157,7 @@
 			this.tabControlMain.SelectedIndex = 0;
 			this.tabControlMain.Size = new Size(800, 426);
 			this.tabControlMain.TabIndex = 1;
+			this.tabControlMain.KeyUp += this.tabControlMain_KeyUp;
 			// 
 			// tabPageStudents
 			// 

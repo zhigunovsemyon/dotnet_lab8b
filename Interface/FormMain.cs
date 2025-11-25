@@ -125,4 +125,29 @@ public partial class FormMain : Form
 			((UserControlPlan)item).Selected = false;
 		}
 	}
+
+	/// <summary> 
+	/// Метод, вызываемый по нажатию клавиши. 
+	/// Предназначен для вызова удаления плана по Delete. 
+	/// </summary>
+	private void tabControlMain_KeyUp (object sender, KeyEventArgs e)
+	{
+		if (e.KeyCode != Keys.Delete) { 
+			return; 
+		}
+
+		if (this.tabControlMain.SelectedTab != this.tabPagePlans) {
+			return;
+		}
+
+		foreach (UserControlPlan? ucPlan in tabPagePlans.Controls) {
+			if (ucPlan?.Selected ?? false) {
+				if (VerifyDeletion(ucPlan.Plan.ToString()) != DialogResult.Yes) {
+					return;
+				}
+
+				Journal.Get.RemovePlan(ucPlan.Plan);
+			}
+		}
+	}
 }
