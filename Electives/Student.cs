@@ -1,6 +1,7 @@
 ﻿namespace Electives;
 
 /// <summary> Класс, содержащий информацию о студенте </summary>
+[Serializable]
 public class Student : IValidatable
 {
 	/// <summary> Счётчик идентификаторов  </summary>

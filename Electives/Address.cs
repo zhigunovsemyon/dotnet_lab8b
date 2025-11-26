@@ -1,6 +1,7 @@
 ﻿namespace Electives;
 
 /// <summary> Адрес </summary>
+[Serializable]
 public class Address : IValidatable
 {
 	/// <summary>Параметризованный конструктор</summary>

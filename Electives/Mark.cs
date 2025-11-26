@@ -1,9 +1,8 @@
-﻿using System.Threading;
-
-namespace Electives;
+﻿namespace Electives;
 
 /// <summary>Оценка</summary>
 /// <param name="t">Значение</param>
+[Serializable]
 public struct Mark (Mark.Type t = Mark.Type.None)
 {
 	/// <summary>Возможное значение оценки</summary>

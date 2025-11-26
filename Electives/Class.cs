@@ -1,6 +1,7 @@
 ﻿namespace Electives;
 
 /// <summary> Предмет </summary>
+[Serializable]
 public class Class : IValidatable
 {
 	/// <summary> Счётчик идентификаторов  </summary>

@@ -5,6 +5,7 @@ namespace Electives;
 /// <summary>
 /// Учебный план для студента по предмету
 /// </summary>
+[Serializable]
 public class Plan : IValidatable
 {
 	private static readonly Electives.Journal s_journal = Electives.Journal.Get;
