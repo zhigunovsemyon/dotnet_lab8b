@@ -62,6 +62,8 @@
 			labsHeader = new ColumnHeader();
 			practicesHeader = new ColumnHeader();
 			tabPagePlans = new TabPage();
+			openFileDialog = new OpenFileDialog();
+			saveFileDialog = new SaveFileDialog();
 			menuStrip1.SuspendLayout();
 			tabControlMain.SuspendLayout();
 			tabPageStudents.SuspendLayout();
@@ -157,14 +159,14 @@
 			// toolStripMenuItemAddStudent
 			// 
 			toolStripMenuItemAddStudent.Name = "toolStripMenuItemAddStudent";
-			toolStripMenuItemAddStudent.Size = new Size(154, 22);
+			toolStripMenuItemAddStudent.Size = new Size(180, 22);
 			toolStripMenuItemAddStudent.Text = "&Добавить";
 			toolStripMenuItemAddStudent.Click += StudentAddtoolStripMenuItem_Click;
 			// 
 			// toolStripMenuItemEditStudent
 			// 
 			toolStripMenuItemEditStudent.Name = "toolStripMenuItemEditStudent";
-			toolStripMenuItemEditStudent.Size = new Size(154, 22);
+			toolStripMenuItemEditStudent.Size = new Size(180, 22);
 			toolStripMenuItemEditStudent.Text = "&Редактировать";
 			toolStripMenuItemEditStudent.Click += StudentEditToolStripMenuItem_Click;
 			// 
@@ -178,14 +180,14 @@
 			// toolStripMenuItemAddClass
 			// 
 			toolStripMenuItemAddClass.Name = "toolStripMenuItemAddClass";
-			toolStripMenuItemAddClass.Size = new Size(154, 22);
+			toolStripMenuItemAddClass.Size = new Size(180, 22);
 			toolStripMenuItemAddClass.Text = "&Добавить";
 			toolStripMenuItemAddClass.Click += ClassAddStripMenuItem_Click;
 			// 
 			// toolStripMenuItemEditClass
 			// 
 			toolStripMenuItemEditClass.Name = "toolStripMenuItemEditClass";
-			toolStripMenuItemEditClass.Size = new Size(154, 22);
+			toolStripMenuItemEditClass.Size = new Size(180, 22);
 			toolStripMenuItemEditClass.Text = "&Редактировать";
 			toolStripMenuItemEditClass.Click += ClassEditStripMenuItem_Click;
 			// 
@@ -330,6 +332,10 @@
 			tabPagePlans.UseVisualStyleBackColor = true;
 			tabPagePlans.Click += tabPagePlans_Click;
 			// 
+			// openFileDialog1
+			// 
+			openFileDialog.FileName = "openFileDialog1";
+			// 
 			// FormMain
 			// 
 			AutoScaleDimensions = new SizeF(7F, 15F);
@@ -388,5 +394,7 @@
 		private ToolStripMenuItem jsonLoadToolStripMenuItem;
 		private ToolStripMenuItem xmlLoadToolStripMenuItem;
 		private ToolStripMenuItem binLoadToolStripMenuItem;
+		private OpenFileDialog openFileDialog;
+		private SaveFileDialog saveFileDialog;
 	}
 }

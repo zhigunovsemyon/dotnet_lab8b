@@ -156,25 +156,73 @@ public partial class FormMain : Form
 
 	/// <summary> Метод, вызываемый при нажатии на пункта на сохранение в JSON </summary>
 	private void jsonSaveToolStripMenuItem_Click(object sender, EventArgs e)
-		=> s_journal.SaveToFile(Journal.SerializeType.JSON);
+	{ 
+		this.saveFileDialog.Filter = "JSON-файлы|*.json|Все файлы|*.*";
+		if (DialogResult.OK == this.saveFileDialog.ShowDialog()) {
+			s_journal.SaveToFile(
+				Journal.SerializeType.JSON, 
+				this.saveFileDialog.FileName
+			);
+		}
+	}	
 
 	/// <summary> Метод, вызываемый при нажатии на пункта на сохранение в XML </summary>
 	private void xmlSaveToolStripMenuItem_Click(object sender, EventArgs e)
-		=> s_journal.SaveToFile(Journal.SerializeType.XML);
+	{ 
+		this.saveFileDialog.Filter = "XML-файлы|*.xml|Все файлы|*.*";
+		if (DialogResult.OK == this.saveFileDialog.ShowDialog()) {
+			s_journal.SaveToFile(
+				Journal.SerializeType.XML, 
+				this.saveFileDialog.FileName
+			);
+		}
+	}	
 
 	/// <summary> Метод, вызываемый при нажатии на пункта на сохранение в бинарный файл </summary>
 	private void binSaveToolStripMenuItem_Click(object sender, EventArgs e)
-		=> s_journal.SaveToFile(Journal.SerializeType.BIN);
+	{ 
+		this.openFileDialog.Filter = "Бинарные файлы|*.bin|Все файлы|*.*";
+		if (DialogResult.OK == this.saveFileDialog.ShowDialog()) {
+			s_journal.SaveToFile(
+				Journal.SerializeType.BIN, 
+				this.saveFileDialog.FileName
+			);
+		}
+	}	
 
 	/// <summary> Метод, вызываемый при нажатии на пункта на чтение из JSON-файла </summary>
 	private void jsonLoadToolStripMenuItem_Click(object sender, EventArgs e)
-		=> s_journal.ReadFromFile(Journal.SerializeType.JSON);
+	{
+		this.openFileDialog.Filter = "JSON-файлы|*.json|Все файлы|*.*";
+		if (this.openFileDialog.ShowDialog() == DialogResult.OK) {
+			s_journal.ReadFromFile(
+				Journal.SerializeType.JSON,
+				this.openFileDialog.FileName
+			);
+		}
+	}
 
 	/// <summary> Метод, вызываемый при нажатии на пункта на чтение из XML-файла </summary>
 	private void xmlLoadToolStripMenuItem_Click(object sender, EventArgs e)
-		=> s_journal.ReadFromFile(Journal.SerializeType.XML);
+	{
+		this.openFileDialog.Filter = "XML-файлы|*.xml|Все файлы|*.*";
+		if (this.openFileDialog.ShowDialog() == DialogResult.OK) {
+			s_journal.ReadFromFile(
+				Journal.SerializeType.JSON,
+				this.openFileDialog.FileName
+			);
+		}
+	}
 
 	/// <summary> Метод, вызываемый при нажатии на пункта на чтение из бинарного файла </summary>
 	private void binLoadToolStripMenuItem_Click(object sender, EventArgs e)
-		=> s_journal.ReadFromFile(Journal.SerializeType.BIN);
+	{
+		this.openFileDialog.Filter = "Бинарные файлы|*.bin|Все файлы|*.*";
+		if (this.openFileDialog.ShowDialog() == DialogResult.OK) {
+			s_journal.ReadFromFile(
+				Journal.SerializeType.JSON,
+				this.openFileDialog.FileName
+			);
+		}
+	}
 }

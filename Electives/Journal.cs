@@ -13,11 +13,11 @@ public class Journal
 
 	/// <summary> Сохранение журнала в файл </summary>
 	/// <param name="type">Тип сериализации</param>
-	public void SaveToFile(SerializeType type) { }
+	public void SaveToFile(SerializeType type, string filename) { }
 
 	/// <summary> Чтение журнала из файл </summary>
 	/// <param name="type">Тип сериализации</param>
-	public void ReadFromFile(SerializeType type) { }
+	public void ReadFromFile(SerializeType type, string filename) { }
 
 	/// <summary> Закрытый конструктор </summary>
 	private Journal () { }
