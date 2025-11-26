@@ -11,25 +11,28 @@ public partial class FormMain : Form
 	private readonly FormClass _formClass = new();
 	private readonly FormStudent _formStudent = new();
 
-	public FormMain ()
+	/// <summary> Ссылка на журнал </summary>
+	private readonly Electives.Journal s_journal = Journal.Get;
+
+	public FormMain()
 	{
 		this.InitializeComponent();
 
-		Journal.Get.PlanAdded += this.PlanAdded;
-		Journal.Get.PlanRemoved += this.PlanRemoved;
+		s_journal.PlanAdded += this.PlanAdded;
+		s_journal.PlanRemoved += this.PlanRemoved;
 
-		Journal.Get.StudentAdded += this.ItemAdded;
-		Journal.Get.StudentRemoved += this.ItemRemoved;
+		s_journal.StudentAdded += this.ItemAdded;
+		s_journal.StudentRemoved += this.ItemRemoved;
 
-		Journal.Get.ClassAdded += this.ItemAdded;
-		Journal.Get.ClassRemoved += this.ItemRemoved;
+		s_journal.ClassAdded += this.ItemAdded;
+		s_journal.ClassRemoved += this.ItemRemoved;
 
 		UserControlPlan.PlanNeedsToUpdate += this.UpdateSelectedPlan;
 	}
 
 	/// <summary> Метод, вызываемый ивентом при необходимости изменения плана </summary>
 	/// <param name="sender">Изменяемый план</param>
-	private void UpdateSelectedPlan (object? sender, EventArgs e)
+	private void UpdateSelectedPlan(object? sender, EventArgs e)
 	{
 		if (sender is Electives.Plan plan) {
 			this.AddOrEditPlan(plan);
@@ -37,12 +40,12 @@ public partial class FormMain : Form
 	}
 
 	/// <summary> Метод для закрытия приложения через пункт меню </summary>
-	private void CloseButton_Click (object sender, EventArgs e) => this.Close();
+	private void CloseButton_Click(object sender, EventArgs e) => this.Close();
 
 	/// <summary> Запрос подтверждения от пользователя удаления </summary>
 	/// <param name="text">Текст в окне</param>
 	/// <returns>Ответ пользователя</returns>
-	private static DialogResult VerifyDeletion (string item)
+	private static DialogResult VerifyDeletion(string item)
 		=> MessageBox.Show($"Удалить {item}?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
 	/// <summary> Добавление нового элемента в нужные списки формы </summary>
@@ -50,7 +53,7 @@ public partial class FormMain : Form
 	/// <param name="e"></param>
 	/// <exception cref="ArgumentNullException">При sender null</exception>
 	/// <exception cref="InvalidDataException">При sender неправильного типа</exception>
-	private void ItemAdded (object? sender, EventArgs e)
+	private void ItemAdded(object? sender, EventArgs e)
 	{
 		_ = sender switch
 		{
@@ -67,7 +70,7 @@ public partial class FormMain : Form
 	/// <param name="e"></param>
 	/// <exception cref="ArgumentNullException">При sender null</exception>
 	/// <exception cref="InvalidDataException">При sender неправильного типа</exception>
-	private void ItemRemoved (object? sender, EventArgs e)
+	private void ItemRemoved(object? sender, EventArgs e)
 	{
 		var lv = sender switch
 		{
@@ -90,7 +93,7 @@ public partial class FormMain : Form
 	/// <param name="e"></param>
 	/// <exception cref="ArgumentNullException">При sender null</exception>
 	/// <exception cref="InvalidDataException">При sender неправильного типа</exception>
-	private void PlanRemoved (object? sender, EventArgs e)
+	private void PlanRemoved(object? sender, EventArgs e)
 	{
 		var oldPlan = sender as Electives.Plan
 			?? throw new InvalidDataException("FormMain.PlanAdded: sender is invalid");
@@ -110,7 +113,7 @@ public partial class FormMain : Form
 	/// <param name="e"></param>
 	/// <exception cref="ArgumentNullException">При sender null</exception>
 	/// <exception cref="InvalidDataException">При sender неправильного типа</exception>
-	private void PlanAdded (object? sender, EventArgs e)
+	private void PlanAdded(object? sender, EventArgs e)
 	{
 		var newPlan = sender as Electives.Plan
 			?? throw new InvalidDataException("FormMain.PlanAdded: sender is invalid");
@@ -119,7 +122,7 @@ public partial class FormMain : Form
 	}
 
 	/// <summary> Обработка нажатия по пустому полю для снятия выделения </summary>
-	private void tabPagePlans_Click (object sender, EventArgs e)
+	private void tabPagePlans_Click(object sender, EventArgs e)
 	{
 		foreach (var item in tabPagePlans.Controls) {
 			((UserControlPlan)item).Selected = false;
@@ -130,10 +133,10 @@ public partial class FormMain : Form
 	/// Метод, вызываемый по нажатию клавиши. 
 	/// Предназначен для вызова удаления плана по Delete. 
 	/// </summary>
-	private void tabControlMain_KeyUp (object sender, KeyEventArgs e)
+	private void tabControlMain_KeyUp(object sender, KeyEventArgs e)
 	{
-		if (e.KeyCode != Keys.Delete) { 
-			return; 
+		if (e.KeyCode != Keys.Delete) {
+			return;
 		}
 
 		if (this.tabControlMain.SelectedTab != this.tabPagePlans) {
@@ -146,8 +149,32 @@ public partial class FormMain : Form
 					return;
 				}
 
-				Journal.Get.RemovePlan(ucPlan.Plan);
+				s_journal.RemovePlan(ucPlan.Plan);
 			}
 		}
 	}
+
+	/// <summary> Метод, вызываемый при нажатии на пункта на сохранение в JSON </summary>
+	private void jsonSaveToolStripMenuItem_Click(object sender, EventArgs e)
+		=> s_journal.SaveToFile(Journal.SerializeType.JSON);
+
+	/// <summary> Метод, вызываемый при нажатии на пункта на сохранение в XML </summary>
+	private void xmlSaveToolStripMenuItem_Click(object sender, EventArgs e)
+		=> s_journal.SaveToFile(Journal.SerializeType.XML);
+
+	/// <summary> Метод, вызываемый при нажатии на пункта на сохранение в бинарный файл </summary>
+	private void binSaveToolStripMenuItem_Click(object sender, EventArgs e)
+		=> s_journal.SaveToFile(Journal.SerializeType.BIN);
+
+	/// <summary> Метод, вызываемый при нажатии на пункта на чтение из JSON-файла </summary>
+	private void jsonLoadToolStripMenuItem_Click(object sender, EventArgs e)
+		=> s_journal.ReadFromFile(Journal.SerializeType.JSON);
+
+	/// <summary> Метод, вызываемый при нажатии на пункта на чтение из XML-файла </summary>
+	private void xmlLoadToolStripMenuItem_Click(object sender, EventArgs e)
+		=> s_journal.ReadFromFile(Journal.SerializeType.XML);
+
+	/// <summary> Метод, вызываемый при нажатии на пункта на чтение из бинарного файла </summary>
+	private void binLoadToolStripMenuItem_Click(object sender, EventArgs e)
+		=> s_journal.ReadFromFile(Journal.SerializeType.BIN);
 }

@@ -3,6 +3,22 @@
 /// <summary> Класс, содержащий все необходимые коллекции </summary>
 public class Journal
 {
+	/// <summary> Используемый формат сериализации </summary>
+	public enum SerializeType
+	{
+		JSON,
+		XML,
+		BIN
+	}
+
+	/// <summary> Сохранение журнала в файл </summary>
+	/// <param name="type">Тип сериализации</param>
+	public void SaveToFile(SerializeType type) { }
+
+	/// <summary> Чтение журнала из файл </summary>
+	/// <param name="type">Тип сериализации</param>
+	public void ReadFromFile(SerializeType type) { }
+
 	/// <summary> Закрытый конструктор </summary>
 	private Journal () { }
 

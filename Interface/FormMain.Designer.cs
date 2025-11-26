@@ -25,266 +25,330 @@
 		///  Required method for Designer support - do not modify
 		///  the contents of this method with the code editor.
 		/// </summary>
-		private void InitializeComponent ()
+		private void InitializeComponent()
 		{
-			this.menuStrip1 = new MenuStrip();
-			this.toolStripMenuItemFile = new ToolStripMenuItem();
-			this.toolStripMenuItemClose = new ToolStripMenuItem();
-			this.toolStripMenuItemStudents = new ToolStripMenuItem();
-			this.toolStripMenuItemAddStudent = new ToolStripMenuItem();
-			this.toolStripMenuItemEditStudent = new ToolStripMenuItem();
-			this.ClassesToolStripMenuItem = new ToolStripMenuItem();
-			this.toolStripMenuItemAddClass = new ToolStripMenuItem();
-			this.toolStripMenuItemEditClass = new ToolStripMenuItem();
-			this.планToolStripMenuItem = new ToolStripMenuItem();
-			this.ToolStripMenuItemAddPlan = new ToolStripMenuItem();
-			this.ToolStripMenuItemEditPlan = new ToolStripMenuItem();
-			this.tabControlMain = new TabControl();
-			this.tabPageStudents = new TabPage();
-			this.listViewStudents = new ListView();
-			this.surnameHeader = new ColumnHeader();
-			this.nameHeader = new ColumnHeader();
-			this.patronimHeader = new ColumnHeader();
-			this.phoneHeader = new ColumnHeader();
-			this.addressHeader = new ColumnHeader();
-			this.tabPageClasses = new TabPage();
-			this.listViewClasses = new ListView();
-			this.classNameHeader = new ColumnHeader();
-			this.lectionsHeader = new ColumnHeader();
-			this.labsHeader = new ColumnHeader();
-			this.practicesHeader = new ColumnHeader();
-			this.tabPagePlans = new TabPage();
-			this.menuStrip1.SuspendLayout();
-			this.tabControlMain.SuspendLayout();
-			this.tabPageStudents.SuspendLayout();
-			this.tabPageClasses.SuspendLayout();
-			this.SuspendLayout();
+			menuStrip1 = new MenuStrip();
+			toolStripMenuItemFile = new ToolStripMenuItem();
+			saveToolStripMenuItem = new ToolStripMenuItem();
+			jsonSaveToolStripMenuItem = new ToolStripMenuItem();
+			xmlSaveToolStripMenuItem = new ToolStripMenuItem();
+			binSaveToolStripMenuItem = new ToolStripMenuItem();
+			loadToolStripMenuItem = new ToolStripMenuItem();
+			jsonLoadToolStripMenuItem = new ToolStripMenuItem();
+			xmlLoadToolStripMenuItem = new ToolStripMenuItem();
+			binLoadToolStripMenuItem = new ToolStripMenuItem();
+			toolStripMenuItemClose = new ToolStripMenuItem();
+			toolStripMenuItemStudents = new ToolStripMenuItem();
+			toolStripMenuItemAddStudent = new ToolStripMenuItem();
+			toolStripMenuItemEditStudent = new ToolStripMenuItem();
+			ClassesToolStripMenuItem = new ToolStripMenuItem();
+			toolStripMenuItemAddClass = new ToolStripMenuItem();
+			toolStripMenuItemEditClass = new ToolStripMenuItem();
+			планToolStripMenuItem = new ToolStripMenuItem();
+			ToolStripMenuItemAddPlan = new ToolStripMenuItem();
+			ToolStripMenuItemEditPlan = new ToolStripMenuItem();
+			tabControlMain = new TabControl();
+			tabPageStudents = new TabPage();
+			listViewStudents = new ListView();
+			surnameHeader = new ColumnHeader();
+			nameHeader = new ColumnHeader();
+			patronimHeader = new ColumnHeader();
+			phoneHeader = new ColumnHeader();
+			addressHeader = new ColumnHeader();
+			tabPageClasses = new TabPage();
+			listViewClasses = new ListView();
+			classNameHeader = new ColumnHeader();
+			lectionsHeader = new ColumnHeader();
+			labsHeader = new ColumnHeader();
+			practicesHeader = new ColumnHeader();
+			tabPagePlans = new TabPage();
+			menuStrip1.SuspendLayout();
+			tabControlMain.SuspendLayout();
+			tabPageStudents.SuspendLayout();
+			tabPageClasses.SuspendLayout();
+			SuspendLayout();
 			// 
 			// menuStrip1
 			// 
-			this.menuStrip1.Items.AddRange(new ToolStripItem[] { this.toolStripMenuItemFile, this.toolStripMenuItemStudents, this.ClassesToolStripMenuItem, this.планToolStripMenuItem });
-			this.menuStrip1.Location = new Point(0, 0);
-			this.menuStrip1.Name = "menuStrip1";
-			this.menuStrip1.Size = new Size(800, 24);
-			this.menuStrip1.TabIndex = 0;
-			this.menuStrip1.Text = "menuStrip1";
+			menuStrip1.Items.AddRange(new ToolStripItem[] { toolStripMenuItemFile, toolStripMenuItemStudents, ClassesToolStripMenuItem, планToolStripMenuItem });
+			menuStrip1.Location = new Point(0, 0);
+			menuStrip1.Name = "menuStrip1";
+			menuStrip1.Size = new Size(800, 24);
+			menuStrip1.TabIndex = 0;
+			menuStrip1.Text = "menuStrip1";
 			// 
 			// toolStripMenuItemFile
 			// 
-			this.toolStripMenuItemFile.DropDownItems.AddRange(new ToolStripItem[] { this.toolStripMenuItemClose });
-			this.toolStripMenuItemFile.Name = "toolStripMenuItemFile";
-			this.toolStripMenuItemFile.Size = new Size(48, 20);
-			this.toolStripMenuItemFile.Text = "&Файл";
+			toolStripMenuItemFile.DropDownItems.AddRange(new ToolStripItem[] { saveToolStripMenuItem, loadToolStripMenuItem, toolStripMenuItemClose });
+			toolStripMenuItemFile.Name = "toolStripMenuItemFile";
+			toolStripMenuItemFile.Size = new Size(48, 20);
+			toolStripMenuItemFile.Text = "&Файл";
+			// 
+			// saveToolStripMenuItem
+			// 
+			saveToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { jsonSaveToolStripMenuItem, xmlSaveToolStripMenuItem, binSaveToolStripMenuItem });
+			saveToolStripMenuItem.Name = "saveToolStripMenuItem";
+			saveToolStripMenuItem.Size = new Size(180, 22);
+			saveToolStripMenuItem.Text = "&Сохранить";
+			// 
+			// jsonSaveToolStripMenuItem
+			// 
+			jsonSaveToolStripMenuItem.Name = "jsonSaveToolStripMenuItem";
+			jsonSaveToolStripMenuItem.Size = new Size(163, 22);
+			jsonSaveToolStripMenuItem.Text = "&JSON";
+			jsonSaveToolStripMenuItem.Click += jsonSaveToolStripMenuItem_Click;
+			// 
+			// xmlSaveToolStripMenuItem
+			// 
+			xmlSaveToolStripMenuItem.Name = "xmlSaveToolStripMenuItem";
+			xmlSaveToolStripMenuItem.Size = new Size(163, 22);
+			xmlSaveToolStripMenuItem.Text = "&XML";
+			xmlSaveToolStripMenuItem.Click += xmlSaveToolStripMenuItem_Click;
+			// 
+			// binSaveToolStripMenuItem
+			// 
+			binSaveToolStripMenuItem.Name = "binSaveToolStripMenuItem";
+			binSaveToolStripMenuItem.Size = new Size(163, 22);
+			binSaveToolStripMenuItem.Text = "&Бинарный файл";
+			binSaveToolStripMenuItem.Click += binSaveToolStripMenuItem_Click;
+			// 
+			// loadToolStripMenuItem
+			// 
+			loadToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { jsonLoadToolStripMenuItem, xmlLoadToolStripMenuItem, binLoadToolStripMenuItem });
+			loadToolStripMenuItem.Name = "loadToolStripMenuItem";
+			loadToolStripMenuItem.Size = new Size(180, 22);
+			loadToolStripMenuItem.Text = "&Загрузить";
+			// 
+			// jsonLoadToolStripMenuItem
+			// 
+			jsonLoadToolStripMenuItem.Name = "jsonLoadToolStripMenuItem";
+			jsonLoadToolStripMenuItem.Size = new Size(180, 22);
+			jsonLoadToolStripMenuItem.Text = "&JSON";
+			jsonLoadToolStripMenuItem.Click += jsonLoadToolStripMenuItem_Click;
+			// 
+			// xmlLoadToolStripMenuItem
+			// 
+			xmlLoadToolStripMenuItem.Name = "xmlLoadToolStripMenuItem";
+			xmlLoadToolStripMenuItem.Size = new Size(180, 22);
+			xmlLoadToolStripMenuItem.Text = "&XML";
+			xmlLoadToolStripMenuItem.Click += xmlLoadToolStripMenuItem_Click;
+			// 
+			// binLoadToolStripMenuItem
+			// 
+			binLoadToolStripMenuItem.Name = "binLoadToolStripMenuItem";
+			binLoadToolStripMenuItem.Size = new Size(180, 22);
+			binLoadToolStripMenuItem.Text = "&Бинарный файл";
+			binLoadToolStripMenuItem.Click += binLoadToolStripMenuItem_Click;
 			// 
 			// toolStripMenuItemClose
 			// 
-			this.toolStripMenuItemClose.Name = "toolStripMenuItemClose";
-			this.toolStripMenuItemClose.Size = new Size(109, 22);
-			this.toolStripMenuItemClose.Text = "&Выйти";
-			this.toolStripMenuItemClose.Click += this.CloseButton_Click;
+			toolStripMenuItemClose.Name = "toolStripMenuItemClose";
+			toolStripMenuItemClose.Size = new Size(180, 22);
+			toolStripMenuItemClose.Text = "&Выйти";
+			toolStripMenuItemClose.Click += CloseButton_Click;
 			// 
 			// toolStripMenuItemStudents
 			// 
-			this.toolStripMenuItemStudents.DropDownItems.AddRange(new ToolStripItem[] { this.toolStripMenuItemAddStudent, this.toolStripMenuItemEditStudent });
-			this.toolStripMenuItemStudents.Name = "toolStripMenuItemStudents";
-			this.toolStripMenuItemStudents.Size = new Size(71, 20);
-			this.toolStripMenuItemStudents.Text = "&Студенты";
+			toolStripMenuItemStudents.DropDownItems.AddRange(new ToolStripItem[] { toolStripMenuItemAddStudent, toolStripMenuItemEditStudent });
+			toolStripMenuItemStudents.Name = "toolStripMenuItemStudents";
+			toolStripMenuItemStudents.Size = new Size(71, 20);
+			toolStripMenuItemStudents.Text = "&Студенты";
 			// 
 			// toolStripMenuItemAddStudent
 			// 
-			this.toolStripMenuItemAddStudent.Name = "toolStripMenuItemAddStudent";
-			this.toolStripMenuItemAddStudent.Size = new Size(154, 22);
-			this.toolStripMenuItemAddStudent.Text = "&Добавить";
-			this.toolStripMenuItemAddStudent.Click += this.StudentAddtoolStripMenuItem_Click;
+			toolStripMenuItemAddStudent.Name = "toolStripMenuItemAddStudent";
+			toolStripMenuItemAddStudent.Size = new Size(154, 22);
+			toolStripMenuItemAddStudent.Text = "&Добавить";
+			toolStripMenuItemAddStudent.Click += StudentAddtoolStripMenuItem_Click;
 			// 
 			// toolStripMenuItemEditStudent
 			// 
-			this.toolStripMenuItemEditStudent.Name = "toolStripMenuItemEditStudent";
-			this.toolStripMenuItemEditStudent.Size = new Size(154, 22);
-			this.toolStripMenuItemEditStudent.Text = "&Редактировать";
-			this.toolStripMenuItemEditStudent.Click += this.StudentEditToolStripMenuItem_Click;
+			toolStripMenuItemEditStudent.Name = "toolStripMenuItemEditStudent";
+			toolStripMenuItemEditStudent.Size = new Size(154, 22);
+			toolStripMenuItemEditStudent.Text = "&Редактировать";
+			toolStripMenuItemEditStudent.Click += StudentEditToolStripMenuItem_Click;
 			// 
 			// ClassesToolStripMenuItem
 			// 
-			this.ClassesToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { this.toolStripMenuItemAddClass, this.toolStripMenuItemEditClass });
-			this.ClassesToolStripMenuItem.Name = "ClassesToolStripMenuItem";
-			this.ClassesToolStripMenuItem.Size = new Size(63, 20);
-			this.ClassesToolStripMenuItem.Text = "&Занятия";
+			ClassesToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { toolStripMenuItemAddClass, toolStripMenuItemEditClass });
+			ClassesToolStripMenuItem.Name = "ClassesToolStripMenuItem";
+			ClassesToolStripMenuItem.Size = new Size(63, 20);
+			ClassesToolStripMenuItem.Text = "&Занятия";
 			// 
 			// toolStripMenuItemAddClass
 			// 
-			this.toolStripMenuItemAddClass.Name = "toolStripMenuItemAddClass";
-			this.toolStripMenuItemAddClass.Size = new Size(154, 22);
-			this.toolStripMenuItemAddClass.Text = "&Добавить";
-			this.toolStripMenuItemAddClass.Click += this.ClassAddStripMenuItem_Click;
+			toolStripMenuItemAddClass.Name = "toolStripMenuItemAddClass";
+			toolStripMenuItemAddClass.Size = new Size(154, 22);
+			toolStripMenuItemAddClass.Text = "&Добавить";
+			toolStripMenuItemAddClass.Click += ClassAddStripMenuItem_Click;
 			// 
 			// toolStripMenuItemEditClass
 			// 
-			this.toolStripMenuItemEditClass.Name = "toolStripMenuItemEditClass";
-			this.toolStripMenuItemEditClass.Size = new Size(154, 22);
-			this.toolStripMenuItemEditClass.Text = "&Редактировать";
-			this.toolStripMenuItemEditClass.Click += this.ClassEditStripMenuItem_Click;
+			toolStripMenuItemEditClass.Name = "toolStripMenuItemEditClass";
+			toolStripMenuItemEditClass.Size = new Size(154, 22);
+			toolStripMenuItemEditClass.Text = "&Редактировать";
+			toolStripMenuItemEditClass.Click += ClassEditStripMenuItem_Click;
 			// 
 			// планToolStripMenuItem
 			// 
-			this.планToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { this.ToolStripMenuItemAddPlan, this.ToolStripMenuItemEditPlan });
-			this.планToolStripMenuItem.Name = "планToolStripMenuItem";
-			this.планToolStripMenuItem.Size = new Size(48, 20);
-			this.планToolStripMenuItem.Text = "&План";
+			планToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { ToolStripMenuItemAddPlan, ToolStripMenuItemEditPlan });
+			планToolStripMenuItem.Name = "планToolStripMenuItem";
+			планToolStripMenuItem.Size = new Size(48, 20);
+			планToolStripMenuItem.Text = "&План";
 			// 
 			// ToolStripMenuItemAddPlan
 			// 
-			this.ToolStripMenuItemAddPlan.Name = "ToolStripMenuItemAddPlan";
-			this.ToolStripMenuItemAddPlan.Size = new Size(154, 22);
-			this.ToolStripMenuItemAddPlan.Text = "&Добавить";
-			this.ToolStripMenuItemAddPlan.Click += this.PlanAddStripMenuItem_Click;
+			ToolStripMenuItemAddPlan.Name = "ToolStripMenuItemAddPlan";
+			ToolStripMenuItemAddPlan.Size = new Size(154, 22);
+			ToolStripMenuItemAddPlan.Text = "&Добавить";
+			ToolStripMenuItemAddPlan.Click += PlanAddStripMenuItem_Click;
 			// 
 			// ToolStripMenuItemEditPlan
 			// 
-			this.ToolStripMenuItemEditPlan.Name = "ToolStripMenuItemEditPlan";
-			this.ToolStripMenuItemEditPlan.Size = new Size(154, 22);
-			this.ToolStripMenuItemEditPlan.Text = "&Редактировать";
-			this.ToolStripMenuItemEditPlan.Click += this.PlanEditStripMenuItem_Click;
+			ToolStripMenuItemEditPlan.Name = "ToolStripMenuItemEditPlan";
+			ToolStripMenuItemEditPlan.Size = new Size(154, 22);
+			ToolStripMenuItemEditPlan.Text = "&Редактировать";
+			ToolStripMenuItemEditPlan.Click += PlanEditStripMenuItem_Click;
 			// 
 			// tabControlMain
 			// 
-			this.tabControlMain.Controls.Add(this.tabPageStudents);
-			this.tabControlMain.Controls.Add(this.tabPageClasses);
-			this.tabControlMain.Controls.Add(this.tabPagePlans);
-			this.tabControlMain.Dock = DockStyle.Fill;
-			this.tabControlMain.Location = new Point(0, 24);
-			this.tabControlMain.Name = "tabControlMain";
-			this.tabControlMain.SelectedIndex = 0;
-			this.tabControlMain.Size = new Size(800, 426);
-			this.tabControlMain.TabIndex = 1;
-			this.tabControlMain.KeyUp += this.tabControlMain_KeyUp;
+			tabControlMain.Controls.Add(tabPageStudents);
+			tabControlMain.Controls.Add(tabPageClasses);
+			tabControlMain.Controls.Add(tabPagePlans);
+			tabControlMain.Dock = DockStyle.Fill;
+			tabControlMain.Location = new Point(0, 24);
+			tabControlMain.Name = "tabControlMain";
+			tabControlMain.SelectedIndex = 0;
+			tabControlMain.Size = new Size(800, 426);
+			tabControlMain.TabIndex = 1;
+			tabControlMain.KeyUp += tabControlMain_KeyUp;
 			// 
 			// tabPageStudents
 			// 
-			this.tabPageStudents.Controls.Add(this.listViewStudents);
-			this.tabPageStudents.Location = new Point(4, 24);
-			this.tabPageStudents.Name = "tabPageStudents";
-			this.tabPageStudents.Padding = new Padding(3);
-			this.tabPageStudents.Size = new Size(792, 398);
-			this.tabPageStudents.TabIndex = 0;
-			this.tabPageStudents.Text = "Студенты";
-			this.tabPageStudents.UseVisualStyleBackColor = true;
+			tabPageStudents.Controls.Add(listViewStudents);
+			tabPageStudents.Location = new Point(4, 24);
+			tabPageStudents.Name = "tabPageStudents";
+			tabPageStudents.Padding = new Padding(3);
+			tabPageStudents.Size = new Size(792, 398);
+			tabPageStudents.TabIndex = 0;
+			tabPageStudents.Text = "Студенты";
+			tabPageStudents.UseVisualStyleBackColor = true;
 			// 
 			// listViewStudents
 			// 
-			this.listViewStudents.Columns.AddRange(new ColumnHeader[] { this.surnameHeader, this.nameHeader, this.patronimHeader, this.phoneHeader, this.addressHeader });
-			this.listViewStudents.Dock = DockStyle.Fill;
-			this.listViewStudents.FullRowSelect = true;
-			this.listViewStudents.Location = new Point(3, 3);
-			this.listViewStudents.MultiSelect = false;
-			this.listViewStudents.Name = "listViewStudents";
-			this.listViewStudents.Size = new Size(786, 392);
-			this.listViewStudents.TabIndex = 0;
-			this.listViewStudents.UseCompatibleStateImageBehavior = false;
-			this.listViewStudents.View = View.Details;
-			this.listViewStudents.KeyUp += this.listViewStudents_KeyUp;
-			this.listViewStudents.MouseDoubleClick += this.listViewStudents_MouseDoubleClick;
+			listViewStudents.Columns.AddRange(new ColumnHeader[] { surnameHeader, nameHeader, patronimHeader, phoneHeader, addressHeader });
+			listViewStudents.Dock = DockStyle.Fill;
+			listViewStudents.FullRowSelect = true;
+			listViewStudents.Location = new Point(3, 3);
+			listViewStudents.MultiSelect = false;
+			listViewStudents.Name = "listViewStudents";
+			listViewStudents.Size = new Size(786, 392);
+			listViewStudents.TabIndex = 0;
+			listViewStudents.UseCompatibleStateImageBehavior = false;
+			listViewStudents.View = View.Details;
+			listViewStudents.KeyUp += listViewStudents_KeyUp;
+			listViewStudents.MouseDoubleClick += listViewStudents_MouseDoubleClick;
 			// 
 			// surnameHeader
 			// 
-			this.surnameHeader.Text = "Фамилия";
-			this.surnameHeader.Width = 80;
+			surnameHeader.Text = "Фамилия";
+			surnameHeader.Width = 80;
 			// 
 			// nameHeader
 			// 
-			this.nameHeader.Text = "Имя";
+			nameHeader.Text = "Имя";
 			// 
 			// patronimHeader
 			// 
-			this.patronimHeader.Text = "Отчество";
-			this.patronimHeader.Width = 80;
+			patronimHeader.Text = "Отчество";
+			patronimHeader.Width = 80;
 			// 
 			// phoneHeader
 			// 
-			this.phoneHeader.Text = "Телефон";
-			this.phoneHeader.Width = 80;
+			phoneHeader.Text = "Телефон";
+			phoneHeader.Width = 80;
 			// 
 			// addressHeader
 			// 
-			this.addressHeader.Text = "Адрес";
-			this.addressHeader.Width = 120;
+			addressHeader.Text = "Адрес";
+			addressHeader.Width = 120;
 			// 
 			// tabPageClasses
 			// 
-			this.tabPageClasses.Controls.Add(this.listViewClasses);
-			this.tabPageClasses.Location = new Point(4, 24);
-			this.tabPageClasses.Name = "tabPageClasses";
-			this.tabPageClasses.Padding = new Padding(3);
-			this.tabPageClasses.Size = new Size(792, 398);
-			this.tabPageClasses.TabIndex = 1;
-			this.tabPageClasses.Text = "Занятия";
-			this.tabPageClasses.UseVisualStyleBackColor = true;
+			tabPageClasses.Controls.Add(listViewClasses);
+			tabPageClasses.Location = new Point(4, 24);
+			tabPageClasses.Name = "tabPageClasses";
+			tabPageClasses.Padding = new Padding(3);
+			tabPageClasses.Size = new Size(792, 398);
+			tabPageClasses.TabIndex = 1;
+			tabPageClasses.Text = "Занятия";
+			tabPageClasses.UseVisualStyleBackColor = true;
 			// 
 			// listViewClasses
 			// 
-			this.listViewClasses.Columns.AddRange(new ColumnHeader[] { this.classNameHeader, this.lectionsHeader, this.labsHeader, this.practicesHeader });
-			this.listViewClasses.Dock = DockStyle.Fill;
-			this.listViewClasses.FullRowSelect = true;
-			this.listViewClasses.Location = new Point(3, 3);
-			this.listViewClasses.MultiSelect = false;
-			this.listViewClasses.Name = "listViewClasses";
-			this.listViewClasses.Size = new Size(786, 392);
-			this.listViewClasses.TabIndex = 0;
-			this.listViewClasses.UseCompatibleStateImageBehavior = false;
-			this.listViewClasses.View = View.Details;
-			this.listViewClasses.KeyUp += this.listViewClasses_KeyUp;
-			this.listViewClasses.MouseDoubleClick += this.listViewClasses_MouseDoubleClick;
+			listViewClasses.Columns.AddRange(new ColumnHeader[] { classNameHeader, lectionsHeader, labsHeader, practicesHeader });
+			listViewClasses.Dock = DockStyle.Fill;
+			listViewClasses.FullRowSelect = true;
+			listViewClasses.Location = new Point(3, 3);
+			listViewClasses.MultiSelect = false;
+			listViewClasses.Name = "listViewClasses";
+			listViewClasses.Size = new Size(786, 392);
+			listViewClasses.TabIndex = 0;
+			listViewClasses.UseCompatibleStateImageBehavior = false;
+			listViewClasses.View = View.Details;
+			listViewClasses.KeyUp += listViewClasses_KeyUp;
+			listViewClasses.MouseDoubleClick += listViewClasses_MouseDoubleClick;
 			// 
 			// classNameHeader
 			// 
-			this.classNameHeader.Text = "Название";
-			this.classNameHeader.Width = 80;
+			classNameHeader.Text = "Название";
+			classNameHeader.Width = 80;
 			// 
 			// lectionsHeader
 			// 
-			this.lectionsHeader.Text = "Лекции";
+			lectionsHeader.Text = "Лекции";
 			// 
 			// labsHeader
 			// 
-			this.labsHeader.Text = "Лабораторные занятия";
-			this.labsHeader.Width = 140;
+			labsHeader.Text = "Лабораторные занятия";
+			labsHeader.Width = 140;
 			// 
 			// practicesHeader
 			// 
-			this.practicesHeader.Text = "Практические занятия";
-			this.practicesHeader.Width = 140;
+			practicesHeader.Text = "Практические занятия";
+			practicesHeader.Width = 140;
 			// 
 			// tabPagePlans
 			// 
-			this.tabPagePlans.AutoScroll = true;
-			this.tabPagePlans.Location = new Point(4, 24);
-			this.tabPagePlans.Name = "tabPagePlans";
-			this.tabPagePlans.Padding = new Padding(3);
-			this.tabPagePlans.Size = new Size(792, 398);
-			this.tabPagePlans.TabIndex = 2;
-			this.tabPagePlans.Text = "Планы";
-			this.tabPagePlans.UseVisualStyleBackColor = true;
-			this.tabPagePlans.Click += this.tabPagePlans_Click;
+			tabPagePlans.AutoScroll = true;
+			tabPagePlans.Location = new Point(4, 24);
+			tabPagePlans.Name = "tabPagePlans";
+			tabPagePlans.Padding = new Padding(3);
+			tabPagePlans.Size = new Size(792, 398);
+			tabPagePlans.TabIndex = 2;
+			tabPagePlans.Text = "Планы";
+			tabPagePlans.UseVisualStyleBackColor = true;
+			tabPagePlans.Click += tabPagePlans_Click;
 			// 
 			// FormMain
 			// 
-			this.AutoScaleDimensions = new SizeF(7F, 15F);
-			this.AutoScaleMode = AutoScaleMode.Font;
-			this.ClientSize = new Size(800, 450);
-			this.Controls.Add(this.tabControlMain);
-			this.Controls.Add(this.menuStrip1);
-			this.MainMenuStrip = this.menuStrip1;
-			this.MinimumSize = new Size(360, 180);
-			this.Name = "FormMain";
-			this.StartPosition = FormStartPosition.CenterScreen;
-			this.Text = "Факультативы";
-			this.menuStrip1.ResumeLayout(false);
-			this.menuStrip1.PerformLayout();
-			this.tabControlMain.ResumeLayout(false);
-			this.tabPageStudents.ResumeLayout(false);
-			this.tabPageClasses.ResumeLayout(false);
-			this.ResumeLayout(false);
-			this.PerformLayout();
+			AutoScaleDimensions = new SizeF(7F, 15F);
+			AutoScaleMode = AutoScaleMode.Font;
+			ClientSize = new Size(800, 450);
+			Controls.Add(tabControlMain);
+			Controls.Add(menuStrip1);
+			MainMenuStrip = menuStrip1;
+			MinimumSize = new Size(360, 180);
+			Name = "FormMain";
+			StartPosition = FormStartPosition.CenterScreen;
+			Text = "Факультативы";
+			menuStrip1.ResumeLayout(false);
+			menuStrip1.PerformLayout();
+			tabControlMain.ResumeLayout(false);
+			tabPageStudents.ResumeLayout(false);
+			tabPageClasses.ResumeLayout(false);
+			ResumeLayout(false);
+			PerformLayout();
 		}
 
 		#endregion
@@ -316,5 +380,13 @@
 		private ColumnHeader lectionsHeader;
 		private ColumnHeader labsHeader;
 		private ColumnHeader practicesHeader;
+		private ToolStripMenuItem saveToolStripMenuItem;
+		private ToolStripMenuItem jsonSaveToolStripMenuItem;
+		private ToolStripMenuItem xmlSaveToolStripMenuItem;
+		private ToolStripMenuItem binSaveToolStripMenuItem;
+		private ToolStripMenuItem loadToolStripMenuItem;
+		private ToolStripMenuItem jsonLoadToolStripMenuItem;
+		private ToolStripMenuItem xmlLoadToolStripMenuItem;
+		private ToolStripMenuItem binLoadToolStripMenuItem;
 	}
 }

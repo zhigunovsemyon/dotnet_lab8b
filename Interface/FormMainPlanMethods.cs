@@ -53,8 +53,8 @@ public partial class FormMain : Form
 		}
 
 		try {
-			Journal.Get.AddPlan(this._formPlan.Plan);
-			Journal.Get.RemovePlan(oldPlan);
+			s_journal.AddPlan(this._formPlan.Plan);
+			s_journal.RemovePlan(oldPlan);
 		}
 		catch (Electives.Exception.InvalidPlanException ex) {
 			MessageBox.Show(

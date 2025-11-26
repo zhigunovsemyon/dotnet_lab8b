@@ -26,7 +26,7 @@ public partial class FormMain : Form
 		}
 
 		try {
-			Journal.Get.AddClass(form.Class);
+			s_journal.AddClass(form.Class);
 		}
 		catch (Electives.Exception.InvalidClassException ex) {
 			MessageBox.Show(
@@ -106,6 +106,6 @@ public partial class FormMain : Form
 			return;
 		}
 
-		Journal.Get.RemoveClass(@class);
+		s_journal.RemoveClass(@class);
 	}
 }
