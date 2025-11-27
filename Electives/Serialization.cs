@@ -38,6 +38,8 @@ partial class Journal
 	{
 		this.WipeJournal();
 
+		//todo: после чтения XML ломается редактирование
+
 		foreach (var item in source._students) {
 			this.AddStudent(item);
 		}
@@ -85,9 +87,13 @@ partial class Journal
 	{
 		switch (type) {
 		case SerializeType.XML:
-			var xmlSerializer = new XmlSerializer(typeof(Journal));
+			var xmlSerializer = new XmlSerializer(typeof(JournalSerializable));
 			using (var sr = new StreamReader(filename)) {
-				_instance = xmlSerializer.Deserialize(sr) as Journal;
+				var newJournal = xmlSerializer.Deserialize(sr) as JournalSerializable;
+				if (newJournal is null) {
+					throw new ArgumentNullException("Journal.ReadFromFile: newJournal null!");
+				}
+				Journal.Get.ReadFromSerializable(newJournal);
 			}
 			break;
 		case SerializeType.JSON:
