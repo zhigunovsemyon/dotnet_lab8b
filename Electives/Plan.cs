@@ -26,7 +26,11 @@ public class Plan : IValidatable
 	/// <summary>
 	/// Конструктор пустого плана. Содержит пустого студента и занятие.
 	/// </summary>
-	public Plan () {}
+	public Plan () 
+	{
+		s_journal.ClassRemoved += this.ClassChangedOrRemoved;
+		s_journal.StudentRemoved += this.StudentChangedOrRemoved;
+	}
 
 	/// <summary>Конструктор плана с уже заданной оценкой</summary>
 	/// <param name="student">Студент</param>
@@ -38,8 +42,8 @@ public class Plan : IValidatable
 		this.ClassId = classId;
 		this.Mark = mark;
 
-		Journal.Get.ClassRemoved += this.ClassChangedOrRemoved;
-		Journal.Get.StudentRemoved += this.StudentChangedOrRemoved;
+		s_journal.ClassRemoved += this.ClassChangedOrRemoved;
+		s_journal.StudentRemoved += this.StudentChangedOrRemoved;
 	}
 
 	public bool IsValid 
@@ -66,15 +70,7 @@ public class Plan : IValidatable
 		if (s_journal.FindStudent(oldStudent.Id) is not null) { 
 			s_journal.AddPlan(this.Clone());
 		}
-			s_journal.RemovePlan(this);
-		
-		//var newStudent = findStudent(journal.ListStudents, oldStudent.Id);
-		//if (newStudent is not null) {
-		//	var newPlan = this.Clone();
-		//	newPlan.Student = newStudent;
-		//	journal.AddPlan(newPlan);
-		//}
-		//journal.RemovePlan(this);
+		s_journal.RemovePlan(this);
 	}
 
 	/// <summary> Проверка на наличие обновлённого предмета в списке </summary>
@@ -83,7 +79,7 @@ public class Plan : IValidatable
 	/// <exception cref="ArgumentException"></exception>
 	public void ClassChangedOrRemoved (object? sender, EventArgs e)
 	{
-		var oldClass = sender as Electives.Class ?? 
+		var oldClass = sender as Electives.Class ??
 			throw new ArgumentException("Plan.ClassChangedOrRemoved: sender null or not Class");
 
 		if (this.ClassId != oldClass.Id) {
@@ -93,14 +89,6 @@ public class Plan : IValidatable
 		if (s_journal.FindClass(oldClass.Id) is not null) {
 			s_journal.AddPlan(this.Clone());
 		}
-			s_journal.RemovePlan(this);
-
-		//var newClass = findClass(s_journal.ListClasses, oldClass.Id);
-		//if (newClass is not null) {
-		//	var newPlan = this.Clone();
-		//	newPlan.Class = newClass;
-		//	s_journal.AddPlan(newPlan);
-		//}
-		//s_journal.RemovePlan(this);
+		s_journal.RemovePlan(this);
 	}
 }

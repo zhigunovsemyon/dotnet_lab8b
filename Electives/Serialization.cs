@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using System.Diagnostics;
+using System.Text.Json;
 using System.Xml.Serialization;
 
 namespace Electives;
@@ -38,16 +39,19 @@ partial class Journal
 	{
 		this.WipeJournal();
 
-		//todo: после чтения ломается редактирование
-
 		foreach (var item in source.Students) {
 			this.AddStudent(item);
+			Debug.Assert(item.IsValid);
 		}
 		foreach (var item in source.Classes) {
 			this.AddClass(item);
+			Debug.Assert(item.IsValid);
 		}
 		foreach (var item in source.Plans) {
 			this.AddPlan(item);
+
+			Debug.Assert(item.ClassId >= 0);
+			Debug.Assert(item.StudentId >= 0);
 		}
 	}
 
