@@ -7,31 +7,31 @@ partial class Journal
 {
 	/// <summary> Дочерний класс для сериализации журнала </summary>
 	[Serializable]
-	public class JournalSerializable 
+	public class JournalSerializable
 	{
-		public JournalSerializable() { }
+		public JournalSerializable () { }
 
-		public JournalSerializable(Electives.Journal source) 
+		public JournalSerializable (Electives.Journal source)
 		{
 			foreach (var item in source._students) {
-				this._students.Add(item.Value);
+				this.Students.Add(item.Value);
 			}
 			foreach (var item in source._classes) {
-				this._classes.Add(item.Value);
+				this.Classes.Add(item.Value);
 			}
 			foreach (var item in source._plans) {
-				this._plans.Add(item);
+				this.Plans.Add(item);
 			}
 		}
 
 		/// <summary> Список студентов </summary>
-		public List<Electives.Student> _students = [];
+		public List<Electives.Student> Students { get; set; } = [];
 
 		/// <summary> Список занятий </summary>
-		public List<Electives.Class> _classes = [];
+		public List<Electives.Class> Classes { get; set; } = [];
 
 		/// <summary> Список планов </summary>
-		public List<Electives.Plan> _plans = [];		
+		public List<Electives.Plan> Plans { get; set; } = [];
 	}
 
 	private void ReadFromSerializable (JournalSerializable source)
@@ -40,19 +40,19 @@ partial class Journal
 
 		//todo: после чтения XML ломается редактирование
 
-		foreach (var item in source._students) {
+		foreach (var item in source.Students) {
 			this.AddStudent(item);
 		}
-		foreach (var item in source._classes) {
+		foreach (var item in source.Classes) {
 			this.AddClass(item);
 		}
-		foreach (var item in source._plans) {
+		foreach (var item in source.Plans) {
 			this.AddPlan(item);
 		}
 	}
 
 	/// <summary> Параметры используемой сериализации JSON </summary>
-	static readonly JsonSerializerOptions _jsonSerializerOpts = new() { WriteIndented = true };
+	static readonly JsonSerializerOptions? _jsonSerializerOpts = new() { WriteIndented = true };
 
 	/// <summary> Используемый формат сериализации </summary>
 	public enum SerializeType
@@ -74,7 +74,8 @@ partial class Journal
 			}
 			break;
 		case SerializeType.JSON:
-			File.WriteAllText(filename, JsonSerializer.Serialize(journalToSerialize, _jsonSerializerOpts));
+			var txt = JsonSerializer.Serialize(journalToSerialize, _jsonSerializerOpts);
+			File.WriteAllText(filename, txt);
 			break;
 		default:
 			throw new NotImplementedException("Неизвестный тип сериализации");
@@ -85,26 +86,29 @@ partial class Journal
 	/// <param name="type">Тип сериализации</param>
 	public static void ReadFromFile (SerializeType type, string filename)
 	{
+		JournalSerializable? newJournal = null;
 		switch (type) {
 		case SerializeType.XML:
 			var xmlSerializer = new XmlSerializer(typeof(JournalSerializable));
 			using (var sr = new StreamReader(filename)) {
-				var newJournal = xmlSerializer.Deserialize(sr) as JournalSerializable;
-				if (newJournal is null) {
-					throw new ArgumentNullException("Journal.ReadFromFile: newJournal null!");
-				}
-				Journal.Get.ReadFromSerializable(newJournal);
+				newJournal = xmlSerializer.Deserialize(sr) as JournalSerializable;
 			}
 			break;
 		case SerializeType.JSON:
 			using (var sr = new StreamReader(filename)) {
-				_instance =
-					JsonSerializer.Deserialize<Journal>(sr.ReadToEnd(), _jsonSerializerOpts);
+				newJournal =
+					JsonSerializer.Deserialize<JournalSerializable>(sr.ReadToEnd(), _jsonSerializerOpts);
 			}
 			break;
 		default:
 			throw new NotImplementedException("Неизвестный тип сериализации");
 		}
+
+		//todo: чтение сломано
+		if (newJournal is null) {
+			throw new ArgumentNullException("Journal.ReadFromFile: newJournal null!");
+		}
+		Journal.Get.ReadFromSerializable(newJournal);
 	}
 
 }
