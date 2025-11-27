@@ -5,6 +5,30 @@ namespace Electives;
 
 partial class Journal
 {
+	[Serializable]
+	private class JournalSerializable 
+	{
+		public JournalSerializable() { }
+
+		/// <summary> Список студентов </summary>
+		public Dictionary<int, Electives.Student> _students = [];
+
+		/// <summary> Список занятий </summary>
+		public Dictionary<int, Electives.Class> _classes = [];
+
+		/// <summary> Список планов </summary>
+		public List<Electives.Plan> _plans = [];
+
+		/// <summary> Обмен контейнерами между материнским классом, и классом для сериализации </summary>
+		/// <param name="journal">Материнский класс</param>
+		public void SwapContainers (Journal journal) 
+		{
+			(this._students, journal._students) = (journal._students, this._students); 
+			(this._classes, journal._classes) = (journal._classes, this._classes); 
+			(this._plans, journal._plans) = (journal._plans, this._plans); 
+		}
+	}
+
 	/// <summary> Параметры используемой сериализации JSON </summary>
 	static readonly JsonSerializerOptions _jsonSerializerOpts = new() { WriteIndented = true };
 

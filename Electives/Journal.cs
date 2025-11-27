@@ -1,7 +1,6 @@
 ﻿namespace Electives;
 
 /// <summary> Класс, содержащий все необходимые коллекции </summary>
-[Serializable]
 public partial class Journal
 {
 	/// <summary> Закрытый конструктор </summary>
@@ -15,13 +14,13 @@ public partial class Journal
 
 
 	/// <summary> Список студентов </summary>
-	private readonly Dictionary<int, Electives.Student> _students = [];
+	private Dictionary<int, Electives.Student> _students = [];
 
 	/// <summary> Список занятий </summary>
-	private readonly Dictionary<int, Electives.Class> _classes = [];
+	private Dictionary<int, Electives.Class> _classes = [];
 
 	/// <summary> Список планов </summary>
-	private readonly List<Electives.Plan> _plans = [];
+	private List<Electives.Plan> _plans = [];
 
 
 	/// <summary> Коллекция студентов </summary>
