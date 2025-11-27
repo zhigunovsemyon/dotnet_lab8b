@@ -5,27 +5,47 @@ namespace Electives;
 
 partial class Journal
 {
+	/// <summary> Дочерний класс для сериализации журнала </summary>
 	[Serializable]
-	private class JournalSerializable 
+	public class JournalSerializable 
 	{
 		public JournalSerializable() { }
 
+		public JournalSerializable(Electives.Journal source) 
+		{
+			foreach (var item in source._students) {
+				this._students.Add(item.Value);
+			}
+			foreach (var item in source._classes) {
+				this._classes.Add(item.Value);
+			}
+			foreach (var item in source._plans) {
+				this._plans.Add(item);
+			}
+		}
+
 		/// <summary> Список студентов </summary>
-		public Dictionary<int, Electives.Student> _students = [];
+		public List<Electives.Student> _students = [];
 
 		/// <summary> Список занятий </summary>
-		public Dictionary<int, Electives.Class> _classes = [];
+		public List<Electives.Class> _classes = [];
 
 		/// <summary> Список планов </summary>
-		public List<Electives.Plan> _plans = [];
+		public List<Electives.Plan> _plans = [];		
+	}
 
-		/// <summary> Обмен контейнерами между материнским классом, и классом для сериализации </summary>
-		/// <param name="journal">Материнский класс</param>
-		public void SwapContainers (Journal journal) 
-		{
-			(this._students, journal._students) = (journal._students, this._students); 
-			(this._classes, journal._classes) = (journal._classes, this._classes); 
-			(this._plans, journal._plans) = (journal._plans, this._plans); 
+	private void ReadFromSerializable (JournalSerializable source)
+	{
+		this.WipeJournal();
+
+		foreach (var item in source._students) {
+			this.AddStudent(item);
+		}
+		foreach (var item in source._classes) {
+			this.AddClass(item);
+		}
+		foreach (var item in source._plans) {
+			this.AddPlan(item);
 		}
 	}
 
@@ -43,15 +63,16 @@ partial class Journal
 	/// <param name="type">Тип сериализации</param>
 	public static void SaveToFile (SerializeType type, string filename)
 	{
+		var journalToSerialize = new JournalSerializable(Journal.Get);
 		switch (type) {
 		case SerializeType.XML:
-			var xmlSerializer = new XmlSerializer(typeof(Journal));
+			var xmlSerializer = new XmlSerializer(typeof(JournalSerializable));
 			using (var sw = new StreamWriter(filename)) {
-				xmlSerializer.Serialize(sw, _instance);
+				xmlSerializer.Serialize(sw, journalToSerialize);
 			}
 			break;
 		case SerializeType.JSON:
-			File.WriteAllText(filename, JsonSerializer.Serialize(_instance, _jsonSerializerOpts));
+			File.WriteAllText(filename, JsonSerializer.Serialize(journalToSerialize, _jsonSerializerOpts));
 			break;
 		default:
 			throw new NotImplementedException("Неизвестный тип сериализации");

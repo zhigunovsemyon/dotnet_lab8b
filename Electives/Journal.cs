@@ -4,7 +4,7 @@
 public partial class Journal
 {
 	/// <summary> Закрытый конструктор </summary>
-	private Journal() { }
+	private Journal () { }
 
 	/// <summary> Экземпляр класса </summary>
 	private static Journal? _instance = null;
@@ -54,7 +54,7 @@ public partial class Journal
 	/// <summary> Добавление нового студента в коллекцию </summary>
 	/// <param name="newStudent">Добавляемый студент</param>
 	/// <exception cref="Exception.InvalidStudentException">Ошибка в случае неправильных данных</exception>
-	public void AddStudent(Electives.Student? newStudent)
+	public void AddStudent (Electives.Student? newStudent)
 	{
 		if (newStudent?.IsValid != true) {
 			throw new Exception.InvalidStudentException("Неправильно указаны данные!");
@@ -63,8 +63,7 @@ public partial class Journal
 		try {
 			if (this._students.TryAdd(newStudent.Id, newStudent)) {
 				this.StudentAdded?.Invoke(newStudent, EventArgs.Empty);
-			}
-			else {
+			} else {
 				var oldStudent = this._students[newStudent.Id];
 				this._students[newStudent.Id] = newStudent;
 
@@ -80,7 +79,7 @@ public partial class Journal
 	/// <summary> Добавление нового предмета в коллекцию </summary>
 	/// <param name="newClass"> Добавляемый предмет </param>
 	/// <exception cref="Exception.InvalidClassException"> Ошибка в случае неправильных данных </exception>
-	public void AddClass(Electives.Class? newClass)
+	public void AddClass (Electives.Class? newClass)
 	{
 		if (newClass?.IsValid != true) {
 			throw new Exception.InvalidClassException("Неправильно указаны данные!");
@@ -89,8 +88,7 @@ public partial class Journal
 		try {
 			if (this._classes.TryAdd(newClass.Id, newClass)) {
 				this.ClassAdded?.Invoke(newClass, EventArgs.Empty);
-			}
-			else {
+			} else {
 				var oldClass = this._classes[newClass.Id];
 				this._classes[newClass.Id] = newClass;
 
@@ -106,7 +104,7 @@ public partial class Journal
 	/// <summary> Добавление нового учебного плана в коллекцию </summary>
 	/// <param name="plan"> Добавляемый план </param>
 	/// <exception cref="Exception.InvalidPlanException"> Ошибка в случае неправильных данных </exception>
-	public void AddPlan(Electives.Plan? plan)
+	public void AddPlan (Electives.Plan? plan)
 	{
 		if (plan?.IsValid != true) {
 			throw new Exception.InvalidPlanException("Неправильно указаны данные!");
@@ -123,7 +121,7 @@ public partial class Journal
 
 	/// <summary> Удаление неактуального учебного плана </summary>
 	/// <param name="plan"> Удаляемый план </param>
-	public void RemovePlan(Electives.Plan? plan)
+	public void RemovePlan (Electives.Plan? plan)
 	{
 		if (plan != null) {
 			this.PlanRemoved?.Invoke(plan, EventArgs.Empty);
@@ -136,7 +134,7 @@ public partial class Journal
 
 	/// <summary> Удаление неактуального занатия с очисткой планов </summary>
 	/// <param name="class"> Удаляемое занятие </param>
-	public void RemoveClass(Electives.Class? @class)
+	public void RemoveClass (Electives.Class? @class)
 	{
 		if (@class is null) {
 			return;
@@ -152,7 +150,7 @@ public partial class Journal
 
 	/// <summary> Удаление неактуального студента с очисткой планов </summary>
 	/// <param name="student"> Удаляемый студент </param>
-	public void RemoveStudent(Electives.Student? student)
+	public void RemoveStudent (Electives.Student? student)
 	{
 		if (student is null) {
 			return;
@@ -171,7 +169,7 @@ public partial class Journal
 	/// <param name="students">Список студентов</param>
 	/// <param name="id">Идентификатор</param>
 	/// <returns>Найденный студент или null</returns>
-	public Student? FindStudent(int id)
+	public Student? FindStudent (int id)
 	{
 		try {
 			return this._students[id];
@@ -185,7 +183,7 @@ public partial class Journal
 	/// <param name="classes">Список предметов</param>
 	/// <param name="id">Идентификатор</param>
 	/// <returns>Найденный предмет или null</returns>
-	public Class? FindClass(int id)
+	public Class? FindClass (int id)
 	{
 		try {
 			return this._classes[id];
@@ -193,5 +191,21 @@ public partial class Journal
 		catch (KeyNotFoundException) {
 			return null;
 		}
+	}
+
+	/// <summary> Очистка всего журнала </summary>
+	private void WipeJournal ()
+	{
+		// todo: возможна инвалидация итераторов, проверить
+		foreach (var item in this.ListClasses) {
+			this.RemoveClass(item);
+		}
+
+		// todo: возможна инвалидация итераторов, проверить
+		foreach (var item in this.ListStudents) {
+			this.RemoveStudent(item);
+		}
+
+		//список планов очистится сам
 	}
 }
