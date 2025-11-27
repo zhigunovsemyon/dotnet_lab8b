@@ -194,7 +194,7 @@ public partial class Journal
 	}
 
 	/// <summary> Очистка всего журнала </summary>
-	private void WipeJournal ()
+	public void WipeJournal ()
 	{
 		// todo: возможна инвалидация итераторов, проверить
 		foreach (var item in this.ListClasses) {

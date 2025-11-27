@@ -14,7 +14,7 @@ public partial class FormMain : Form
 	/// <summary> Ссылка на журнал </summary>
 	private readonly Electives.Journal s_journal = Journal.Get;
 
-	public FormMain()
+	public FormMain ()
 	{
 		this.InitializeComponent();
 
@@ -32,7 +32,7 @@ public partial class FormMain : Form
 
 	/// <summary> Метод, вызываемый ивентом при необходимости изменения плана </summary>
 	/// <param name="sender">Изменяемый план</param>
-	private void UpdateSelectedPlan(object? sender, EventArgs e)
+	private void UpdateSelectedPlan (object? sender, EventArgs e)
 	{
 		if (sender is Electives.Plan plan) {
 			this.AddOrEditPlan(plan);
@@ -40,12 +40,12 @@ public partial class FormMain : Form
 	}
 
 	/// <summary> Метод для закрытия приложения через пункт меню </summary>
-	private void CloseButton_Click(object sender, EventArgs e) => this.Close();
+	private void CloseButton_Click (object sender, EventArgs e) => this.Close();
 
 	/// <summary> Запрос подтверждения от пользователя удаления </summary>
 	/// <param name="text">Текст в окне</param>
 	/// <returns>Ответ пользователя</returns>
-	private static DialogResult VerifyDeletion(string item)
+	private static DialogResult VerifyDeletion (string item)
 		=> MessageBox.Show($"Удалить {item}?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
 	/// <summary> Добавление нового элемента в нужные списки формы </summary>
@@ -53,7 +53,7 @@ public partial class FormMain : Form
 	/// <param name="e"></param>
 	/// <exception cref="ArgumentNullException">При sender null</exception>
 	/// <exception cref="InvalidDataException">При sender неправильного типа</exception>
-	private void ItemAdded(object? sender, EventArgs e)
+	private void ItemAdded (object? sender, EventArgs e)
 	{
 		_ = sender switch
 		{
@@ -70,7 +70,7 @@ public partial class FormMain : Form
 	/// <param name="e"></param>
 	/// <exception cref="ArgumentNullException">При sender null</exception>
 	/// <exception cref="InvalidDataException">При sender неправильного типа</exception>
-	private void ItemRemoved(object? sender, EventArgs e)
+	private void ItemRemoved (object? sender, EventArgs e)
 	{
 		var lv = sender switch
 		{
@@ -93,7 +93,7 @@ public partial class FormMain : Form
 	/// <param name="e"></param>
 	/// <exception cref="ArgumentNullException">При sender null</exception>
 	/// <exception cref="InvalidDataException">При sender неправильного типа</exception>
-	private void PlanRemoved(object? sender, EventArgs e)
+	private void PlanRemoved (object? sender, EventArgs e)
 	{
 		var oldPlan = sender as Electives.Plan
 			?? throw new InvalidDataException("FormMain.PlanAdded: sender is invalid");
@@ -113,7 +113,7 @@ public partial class FormMain : Form
 	/// <param name="e"></param>
 	/// <exception cref="ArgumentNullException">При sender null</exception>
 	/// <exception cref="InvalidDataException">При sender неправильного типа</exception>
-	private void PlanAdded(object? sender, EventArgs e)
+	private void PlanAdded (object? sender, EventArgs e)
 	{
 		var newPlan = sender as Electives.Plan
 			?? throw new InvalidDataException("FormMain.PlanAdded: sender is invalid");
@@ -122,7 +122,7 @@ public partial class FormMain : Form
 	}
 
 	/// <summary> Обработка нажатия по пустому полю для снятия выделения </summary>
-	private void tabPagePlans_Click(object sender, EventArgs e)
+	private void tabPagePlans_Click (object sender, EventArgs e)
 	{
 		foreach (var item in tabPagePlans.Controls) {
 			((UserControlPlan)item).Selected = false;
@@ -133,7 +133,7 @@ public partial class FormMain : Form
 	/// Метод, вызываемый по нажатию клавиши. 
 	/// Предназначен для вызова удаления плана по Delete. 
 	/// </summary>
-	private void tabControlMain_KeyUp(object sender, KeyEventArgs e)
+	private void tabControlMain_KeyUp (object sender, KeyEventArgs e)
 	{
 		if (e.KeyCode != Keys.Delete) {
 			return;
@@ -155,31 +155,31 @@ public partial class FormMain : Form
 	}
 
 	/// <summary> Метод, вызываемый при нажатии на пункта на сохранение в JSON </summary>
-	private void jsonSaveToolStripMenuItem_Click(object sender, EventArgs e)
-	{ 
+	private void jsonSaveToolStripMenuItem_Click (object sender, EventArgs e)
+	{
 		this.saveFileDialog.Filter = "JSON-файлы|*.json|Все файлы|*.*";
 		if (DialogResult.OK == this.saveFileDialog.ShowDialog()) {
 			Electives.Journal.SaveToFile(
-				Journal.SerializeType.JSON, 
+				Journal.SerializeType.JSON,
 				this.saveFileDialog.FileName
 			);
 		}
-	}	
+	}
 
 	/// <summary> Метод, вызываемый при нажатии на пункта на сохранение в XML </summary>
-	private void xmlSaveToolStripMenuItem_Click(object sender, EventArgs e)
-	{ 
+	private void xmlSaveToolStripMenuItem_Click (object sender, EventArgs e)
+	{
 		this.saveFileDialog.Filter = "XML-файлы|*.xml|Все файлы|*.*";
 		if (DialogResult.OK == this.saveFileDialog.ShowDialog()) {
 			Electives.Journal.SaveToFile(
-				Journal.SerializeType.XML, 
+				Journal.SerializeType.XML,
 				this.saveFileDialog.FileName
 			);
 		}
 	}
 
 	/// <summary> Метод, вызываемый при нажатии на пункта на чтение из JSON-файла </summary>
-	private void jsonLoadToolStripMenuItem_Click(object sender, EventArgs e)
+	private void jsonLoadToolStripMenuItem_Click (object sender, EventArgs e)
 	{
 		this.openFileDialog.Filter = "JSON-файлы|*.json|Все файлы|*.*";
 		if (this.openFileDialog.ShowDialog() == DialogResult.OK) {
@@ -191,7 +191,7 @@ public partial class FormMain : Form
 	}
 
 	/// <summary> Метод, вызываемый при нажатии на пункта на чтение из XML-файла </summary>
-	private void xmlLoadToolStripMenuItem_Click(object sender, EventArgs e)
+	private void xmlLoadToolStripMenuItem_Click (object sender, EventArgs e)
 	{
 		this.openFileDialog.Filter = "XML-файлы|*.xml|Все файлы|*.*";
 		if (this.openFileDialog.ShowDialog() == DialogResult.OK) {
@@ -199,6 +199,15 @@ public partial class FormMain : Form
 				Journal.SerializeType.XML,
 				this.openFileDialog.FileName
 			);
+		}
+	}
+
+	/// <summary> Метод, вызываемый при запросе пользователя на очистку журнала </summary>
+	private void clearToolStripMenuItem_Click (object sender, EventArgs e)
+	{
+		var res = MessageBox.Show($"Очистить журнал?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+		if (res == DialogResult.Yes) {
+			s_journal.WipeJournal();
 		}
 	}
 }
