@@ -38,7 +38,7 @@ partial class Journal
 	{
 		this.WipeJournal();
 
-		//todo: после чтения XML ломается редактирование
+		//todo: после чтения ломается редактирование
 
 		foreach (var item in source.Students) {
 			this.AddStudent(item);
@@ -74,8 +74,7 @@ partial class Journal
 			}
 			break;
 		case SerializeType.JSON:
-			var txt = JsonSerializer.Serialize(journalToSerialize, _jsonSerializerOpts);
-			File.WriteAllText(filename, txt);
+			File.WriteAllText(filename, JsonSerializer.Serialize(journalToSerialize, _jsonSerializerOpts));
 			break;
 		default:
 			throw new NotImplementedException("Неизвестный тип сериализации");
@@ -104,7 +103,6 @@ partial class Journal
 			throw new NotImplementedException("Неизвестный тип сериализации");
 		}
 
-		//todo: чтение сломано
 		if (newJournal is null) {
 			throw new ArgumentNullException("Journal.ReadFromFile: newJournal null!");
 		}
