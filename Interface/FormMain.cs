@@ -159,7 +159,7 @@ public partial class FormMain : Form
 	{ 
 		this.saveFileDialog.Filter = "JSON-файлы|*.json|Все файлы|*.*";
 		if (DialogResult.OK == this.saveFileDialog.ShowDialog()) {
-			s_journal.SaveToFile(
+			Electives.Journal.SaveToFile(
 				Journal.SerializeType.JSON, 
 				this.saveFileDialog.FileName
 			);
@@ -171,7 +171,7 @@ public partial class FormMain : Form
 	{ 
 		this.saveFileDialog.Filter = "XML-файлы|*.xml|Все файлы|*.*";
 		if (DialogResult.OK == this.saveFileDialog.ShowDialog()) {
-			s_journal.SaveToFile(
+			Electives.Journal.SaveToFile(
 				Journal.SerializeType.XML, 
 				this.saveFileDialog.FileName
 			);
@@ -183,7 +183,7 @@ public partial class FormMain : Form
 	{
 		this.openFileDialog.Filter = "JSON-файлы|*.json|Все файлы|*.*";
 		if (this.openFileDialog.ShowDialog() == DialogResult.OK) {
-			s_journal.ReadFromFile(
+			Electives.Journal.ReadFromFile(
 				Journal.SerializeType.JSON,
 				this.openFileDialog.FileName
 			);
@@ -195,7 +195,7 @@ public partial class FormMain : Form
 	{
 		this.openFileDialog.Filter = "XML-файлы|*.xml|Все файлы|*.*";
 		if (this.openFileDialog.ShowDialog() == DialogResult.OK) {
-			s_journal.ReadFromFile(
+			Electives.Journal.ReadFromFile(
 				Journal.SerializeType.XML,
 				this.openFileDialog.FileName
 			);

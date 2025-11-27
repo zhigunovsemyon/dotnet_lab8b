@@ -1,4 +1,5 @@
-﻿using System.Xml.Serialization;
+﻿using System.Text.Json;
+using System.Xml.Serialization;
 
 namespace Electives;
 
@@ -15,17 +16,20 @@ public class Journal
 
 	/// <summary> Сохранение журнала в файл </summary>
 	/// <param name="type">Тип сериализации</param>
-	public void SaveToFile(SerializeType type, string filename)
+	public static void SaveToFile(SerializeType type, string filename)
 	{
 		switch (type) {
 		case SerializeType.XML:
 			var xmlSerializer = new XmlSerializer(typeof(Journal));
 			using (var sw = new StreamWriter(filename)) { 
-				xmlSerializer.Serialize(sw, this);
+				xmlSerializer.Serialize(sw, _instance);
 			}
 			break;
 		case SerializeType.JSON:
-			throw new NotImplementedException("JSON не сделан");
+			var opts = new JsonSerializerOptions { WriteIndented = true };
+			File.WriteAllText(filename, JsonSerializer.Serialize(_instance, opts));
+			break;
+			//throw new NotImplementedException("JSON не сделан");
 		default:
 			throw new NotImplementedException("Неизвестный тип сериализации");
 		}
@@ -33,7 +37,7 @@ public class Journal
 
 	/// <summary> Чтение журнала из файл </summary>
 	/// <param name="type">Тип сериализации</param>
-	public void ReadFromFile(SerializeType type, string filename) 
+	public static void ReadFromFile(SerializeType type, string filename) 
 	{
 		switch (type) {
 		case SerializeType.XML:
@@ -43,7 +47,12 @@ public class Journal
 			}
 			break;
 		case SerializeType.JSON:
-			throw new NotImplementedException("JSON не сделан");
+			using (var sr = new StreamReader(filename)) {
+				_instance =
+					JsonSerializer.Deserialize<Journal>(sr.ReadToEnd());
+			}
+			break;
+			//throw new NotImplementedException("JSON не сделан");
 		default:
 			throw new NotImplementedException("Неизвестный тип сериализации");
 		}
