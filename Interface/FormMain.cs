@@ -196,7 +196,7 @@ public partial class FormMain : Form
 		this.openFileDialog.Filter = "XML-файлы|*.xml|Все файлы|*.*";
 		if (this.openFileDialog.ShowDialog() == DialogResult.OK) {
 			s_journal.ReadFromFile(
-				Journal.SerializeType.JSON,
+				Journal.SerializeType.XML,
 				this.openFileDialog.FileName
 			);
 		}

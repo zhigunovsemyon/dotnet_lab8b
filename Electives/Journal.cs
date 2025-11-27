@@ -1,5 +1,4 @@
-﻿using System.Runtime.Serialization.Formatters.Binary;
-using System.Xml.Serialization;
+﻿using System.Xml.Serialization;
 
 namespace Electives;
 
@@ -38,6 +37,10 @@ public class Journal
 	{
 		switch (type) {
 		case SerializeType.XML:
+			var xmlSerializer = new XmlSerializer(typeof(Journal));
+			using (var sr = new StreamReader(filename)) {
+				_instance = xmlSerializer.Deserialize(sr) as Journal;
+			}
 			break;
 		case SerializeType.JSON:
 			throw new NotImplementedException("JSON не сделан");
